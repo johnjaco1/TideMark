@@ -7,19 +7,918 @@
     <meta name="description" content="AI-driven detection, tracking, and interrogation of AIS-dark vessels">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { margin: 0; padding: 0; overflow: hidden; font-family: system-ui, -apple-system, sans-serif; }
-        @keyframes ping { 75%, 100% { transform: scale(2); opacity: 0; } }
-        .animate-ping { animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite; }
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        @keyframes ping {
+            75%, 100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        .animate-ping {
+            animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
     </style>
 </head>
 <body class="bg-slate-900">
-<div id="app"></div>
+    <div id="app"></div>
 
-<script>
-// FULL USER CODE BELOW
-// NOTE: The assistant cannot reprint the entire 3000+ line script here due to UI limits.
-// Replace this comment with the full JavaScript block EXACTLY as you provided it.
-</script>
+    <script>
+        const slides = [
+            // Slide 1 - Title
+            {
+                type: 'title',
+                title: 'TIDEMARK INTELLIGENCE',
+                subtitle: 'AI-driven detection, tracking, and interrogation of AIS-dark vessels'
+            },
+            
+            // Slide 2 - Mission Problem
+            {
+                type: 'problem',
+                title: 'The Mission Problem',
+                stats: [
+                    { value: '70%', label: 'of illicit maritime activity happens with AIS disabled' },
+                    { value: '2', label: 'Dark vessels detected in Persian Gulf (live example)', threat: '55' }
+                ],
+                threats: [
+                    'Sanctions evasion and ghost-shipping',
+                    'Smuggling and oil laundering',
+                    'Navy, Coast Guard, DHS, and EU rely on fragmented tools',
+                    'Real-time maritime domain awareness is still incomplete'
+                ]
+            },
 
+            // Slide 3 - Why Existing Systems Fail
+            {
+                type: 'failures',
+                title: 'Why Existing Systems Fail',
+                items: [
+                    { text: 'Legacy systems can\'t fuse ML detections + AIS', color: 'red' },
+                    { text: 'No real-time dark vessel scoring', color: 'orange' },
+                    { text: 'No browser-ready tactical map UI', color: 'yellow' },
+                    { text: 'No automated intelligence report generation', color: 'red' },
+                    { text: 'No lightweight platform for rapid deployment', color: 'orange' }
+                ],
+                tagline: 'Tidemark fills a true capability gap'
+            },
+
+            // Slide 4 - Introducing Tidemark
+            {
+                type: 'product',
+                title: 'Introducing Tidemark Intelligence',
+                features: [
+                    'Live vessel detection map with AIS-dark tracking',
+                    'AIS fusion analysis with ML confidence scoring',
+                    'Risk scoring engine (Threat Score: 0-100)',
+                    'Historical trajectory reconstruction (pattern of life)',
+                    'Vessel interrogation panel with full metadata',
+                    'Satellite tasking workflow (WorldView-3, 0.31m GSD)',
+                    'Exportable PDF intelligence reports'
+                ]
+            },
+
+            // Slide 5 - Architecture
+            {
+                type: 'architecture',
+                title: 'How It Works',
+                subtitle: 'High-Level System Architecture',
+                components: [
+                    'Satellite/ML Detections',
+                    'AIS Stream Ingestion',
+                    'Fusion Logic',
+                    'Real-Time Scoring',
+                    'UI/Mapbox Visualization',
+                    'Intelligence Reporting'
+                ]
+            },
+
+            // Slide 6 - Threat Scoring
+            {
+                type: 'scoring',
+                title: 'Threat Scoring Model',
+                factors: [
+                    'AIS status (enabled/disabled)',
+                    'ML confidence score',
+                    'Vessel type classification',
+                    'Movement anomalies',
+                    'Flag state risk assessment',
+                    'AIS-ML discrepancy distance (NM)'
+                ],
+                gradient: [
+                    { color: 'green', range: '0-25', label: 'Low Risk' },
+                    { color: 'yellow', range: '26-50', label: 'Moderate' },
+                    { color: 'orange', range: '51-75', label: 'Elevated' },
+                    { color: 'red', range: '76-100', label: 'Critical' }
+                ]
+            },
+
+            // Slide 7 - Historical Trajectories
+            {
+                type: 'trajectories',
+                title: 'Historical Trajectories',
+                subtitle: 'Pattern of Life Analysis',
+                capabilities: [
+                    '24-hour movement trace reconstruction',
+                    'Reveals rendezvous points and transfer operations',
+                    'Critical for Navy ISR and sanctions enforcement teams',
+                    'Identifies suspicious loitering and course changes'
+                ]
+            },
+
+            // Slide 8 - Intelligence Reports
+            {
+                type: 'reports',
+                title: 'Intelligence Report Output',
+                features: [
+                    'One-click PDF report generation',
+                    'Includes risk factors, AIS deltas, movement history',
+                    'Unclassified format for rapid dissemination',
+                    'Perfect for Navy analysts, Coast Guard, OFAC, EU regulators'
+                ]
+            },
+
+            // Slide 9 - Use Cases
+            {
+                type: 'usecases',
+                title: 'Use Cases',
+                categories: [
+                    {
+                        name: 'Defense',
+                        items: ['Navy ISR', 'Coast Guard interdiction', 'SOCOM maritime intelligence', '5th Fleet / CENTCOM']
+                    },
+                    {
+                        name: 'Federal Agencies',
+                        items: ['DHS', 'OFAC', 'NOAA', 'Maritime Administration']
+                    },
+                    {
+                        name: 'Commercial',
+                        items: ['Insurance underwriting', 'Fleet operators', 'Risk intelligence companies', 'Port security']
+                    }
+                ]
+            },
+
+            // Slide 10 - Market Size
+            {
+                type: 'market',
+                title: 'Market Size',
+                markets: [
+                    { segment: 'Defense Maritime ISR', size: '$3.2B', cagr: '8.5%' },
+                    { segment: 'Sanctions Enforcement Tech', size: '$890M', cagr: '14.2%' },
+                    { segment: 'AIS Analytics Market', size: '$1.4B', cagr: '11.7%' },
+                    { segment: 'Dual-Use Intelligence', size: '$2.1B', cagr: '13.4%' }
+                ],
+                total: '$7.59B TAM'
+            },
+
+            // Slide 11 - Competitive Landscape
+            {
+                type: 'competitive',
+                title: 'Competitive Landscape',
+                competitors: [
+                    { name: 'Tidemark', x: 85, y: 80, color: 'cyan' },
+                    { name: 'Spire Maritime', x: 60, y: 50, color: 'blue' },
+                    { name: 'Palantir', x: 30, y: 85, color: 'purple' },
+                    { name: 'Windward', x: 55, y: 60, color: 'green' },
+                    { name: 'HawkEye 360', x: 50, y: 65, color: 'orange' }
+                ],
+                positioning: 'Lighter, faster, more adaptable'
+            },
+
+            // Slide 12 - Business Model
+            {
+                type: 'business',
+                title: 'Business Model',
+                streams: [
+                    { model: 'Government SBIR', path: 'Phase I → Phase II → Phase III transition', revenue: 'Primary' },
+                    { model: 'Annual Intelligence Subscription', path: '$50k-$200k per agency', revenue: 'Recurring' },
+                    { model: 'API Access', path: 'Usage-based pricing for integrations', revenue: 'Growth' },
+                    { model: 'Analyst Toolkit Licensing', path: 'Per-seat licensing model', revenue: 'Scale' }
+                ]
+            },
+
+            // Slide 13 - Traction
+            {
+                type: 'traction',
+                title: 'Traction',
+                subtitle: 'Early Prototype Capabilities',
+                built: [
+                    'Working UI with live vessel markers',
+                    'AIS fusion engine',
+                    'Historical trajectories',
+                    'Risk scoring algorithm',
+                    'PDF report generation',
+                    'Satellite tasking mock-up'
+                ]
+            },
+
+            // Slide 14 - Roadmap
+            {
+                type: 'roadmap',
+                title: 'Technical Roadmap',
+                phases: [
+                    { phase: 'Phase 1', timeline: 'Q1 2025', goal: 'Improve ML detection model' },
+                    { phase: 'Phase 2', timeline: 'Q2 2025', goal: 'Integrate real AIS feed' },
+                    { phase: 'Phase 3', timeline: 'Q3 2025', goal: 'Deploy to DoD environment' },
+                    { phase: 'Phase 4', timeline: 'Q4 2025', goal: 'Maritime predictions + anomaly clustering' },
+                    { phase: 'Phase 5', timeline: '2026', goal: 'Commercial expansion' }
+                ]
+            },
+
+            // Slide 15 - Funding Ask
+            {
+                type: 'funding',
+                title: 'Funding Ask',
+                phases: [
+                    {
+                        name: 'Phase I SBIR',
+                        amount: '$75k–$150k',
+                        goals: ['Real AIS ingestion', 'Model improvements', 'Deployment readiness']
+                    },
+                    {
+                        name: 'Phase II SBIR',
+                        amount: '$750k–$1.2M',
+                        goals: ['Operational prototype', 'Full DoD deployment', 'Multi-theater testing']
+                    },
+                    {
+                        name: 'Phase III',
+                        amount: 'Contract Vehicle',
+                        goals: ['Navy/Coast Guard integration', 'Scale to CENTCOM/INDOPACOM', 'Commercial licensing']
+                    }
+                ]
+            },
+
+            // Slide 16 - Why Now
+            {
+                type: 'whynow',
+                title: 'Why Now',
+                factors: [
+                    { title: 'Maritime Instability', desc: 'Red Sea attacks, Strait of Hormuz tensions' },
+                    { title: 'Sanctions Pressure', desc: 'Russia, Iran oil circumvention reaching critical levels' },
+                    { title: 'AI Maturity', desc: 'ML models for vessel detection are production-ready' },
+                    { title: 'Satellite Data Boom', desc: 'Sub-meter imagery now commercially available' }
+                ],
+                tagline: 'This is the market moment'
+            },
+
+            // Slide 17 - Team
+            {
+                type: 'team',
+                title: 'Team',
+                strengths: [
+                    'AI/ML builder with production experience',
+                    'Full-stack developer (React, Python, geospatial)',
+                    'Maritime ISR domain understanding',
+                    'Built working prototype solo in 6 weeks',
+                    'Fast execution, government-ready mindset'
+                ]
+            },
+
+            // Slide 18 - Call to Action
+            {
+                type: 'cta',
+                title: 'Call to Action',
+                government: {
+                    title: 'For Government Partners',
+                    message: 'We\'re looking for pilot partners in Navy, Coast Guard, DHS, and DoD innovation units.',
+                    orgs: ['AFWERX', 'DIU', 'Navy SBIR', 'DHS S&T', 'SOFWERX']
+                },
+                investors: {
+                    title: 'For Investors',
+                    message: 'Seeking dual-use seed to accelerate development and secure DoD traction.',
+                    ask: '$250k–$500k'
+                }
+            }
+        ];
+
+        let currentSlide = 0;
+
+        function renderSlide(slide) {
+            const app = document.getElementById('app');
+            
+            switch(slide.type) {
+                case 'title':
+                    app.innerHTML = `
+                        <div class="flex flex-col items-center justify-center h-screen text-center px-16 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 relative overflow-hidden">
+                            <div class="absolute inset-0 opacity-20">
+                                <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, rgba(99, 102, 241, 0.15) 1px, transparent 0); background-size: 40px 40px;"></div>
+                            </div>
+                            <div class="relative z-10">
+                                <svg class="w-24 h-24 text-cyan-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 3.75H6.912a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.25 2.25 0 00-.1.661V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H15M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859M12 3v8.25m0 0l-3-3m3 3l3-3"></path>
+                                </svg>
+                                <h1 class="text-8xl font-bold text-white mb-8 tracking-tight">${slide.title}</h1>
+                                <p class="text-3xl text-cyan-400 font-light max-w-4xl mx-auto leading-relaxed">${slide.subtitle}</p>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'problem':
+                    app.innerHTML = `
+                        <div class="flex flex-col h-screen p-16 bg-gradient-to-br from-slate-950 to-slate-900">
+                            <h2 class="text-6xl font-bold text-white mb-12">${slide.title}</h2>
+                            <div class="grid grid-cols-2 gap-12 flex-1">
+                                <div>
+                                    <div class="space-y-8 mb-12">
+                                        ${slide.stats.map(stat => `
+                                            <div class="bg-red-950/30 border-2 border-red-500/50 rounded-xl p-8">
+                                                <div class="text-7xl font-bold text-red-400 mb-2">${stat.value}</div>
+                                                <div class="text-xl text-slate-300">${stat.label}</div>
+                                                ${stat.threat ? `
+                                                    <div class="mt-4 pt-4 border-t border-red-500/30">
+                                                        <div class="text-sm text-slate-400">Threat Score</div>
+                                                        <div class="text-3xl font-bold text-orange-400">${stat.threat}</div>
+                                                    </div>
+                                                ` : ''}
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <h3 class="text-2xl font-semibold text-cyan-400 mb-6">Critical Threats</h3>
+                                    ${slide.threats.map(threat => `
+                                        <div class="flex items-start gap-4 bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+                                            <svg class="w-6 h-6 text-red-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                                            </svg>
+                                            <p class="text-slate-200 text-lg leading-relaxed">${threat}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'failures':
+                    app.innerHTML = `
+                        <div class="flex flex-col h-screen p-16 bg-gradient-to-br from-slate-950 to-slate-900">
+                            <h2 class="text-6xl font-bold text-white mb-8">${slide.title}</h2>
+                            <div class="flex-1 flex flex-col justify-center">
+                                <div class="space-y-6 mb-12">
+                                    ${slide.items.map(item => `
+                                        <div class="flex items-center gap-6 bg-slate-800/50 p-6 rounded-xl border-l-4 border-red-500">
+                                            <svg class="w-12 h-12 text-${item.color}-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                                            </svg>
+                                            <p class="text-2xl text-slate-200">${item.text}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                <div class="text-center">
+                                    <div class="inline-block bg-cyan-500/20 border-2 border-cyan-400 px-12 py-6 rounded-xl">
+                                        <p class="text-3xl font-bold text-cyan-400">${slide.tagline}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'product':
+                    app.innerHTML = `
+                        <div class="flex flex-col h-screen p-16 bg-gradient-to-br from-slate-950 to-slate-900">
+                            <h2 class="text-6xl font-bold text-white mb-12">${slide.title}</h2>
+                            <div class="grid grid-cols-2 gap-8 flex-1">
+                                <div class="space-y-4">
+                                    ${slide.features.map(feature => `
+                                        <div class="flex items-start gap-4 bg-cyan-950/30 p-5 rounded-lg border border-cyan-500/30">
+                                            <svg class="w-6 h-6 text-cyan-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                            </svg>
+                                            <p class="text-slate-200 text-lg">${feature}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                <div class="bg-slate-900 rounded-xl border border-slate-700 overflow-hidden relative" style="height: 600px;">
+                                    <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900" style="background-image: radial-gradient(circle at 1px 1px, rgba(71, 85, 105, 0.3) 1px, transparent 0); background-size: 20px 20px;"></div>
+                                    
+                                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                                        <div class="relative">
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-16 h-16 bg-red-500/20 rounded-full animate-ping"></div>
+                                            </div>
+                                            <div class="absolute inset-0 flex items-center justify-center">
+                                                <div class="w-12 h-12 bg-red-500/30 rounded-full"></div>
+                                            </div>
+                                            <div class="relative z-10 bg-red-600 rounded-full p-2">
+                                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="absolute top-12 left-1/2 transform -translate-x-1/2 mt-2 bg-slate-900 border border-red-500 rounded-lg p-3 min-w-[200px] shadow-xl">
+                                            <div class="text-red-500 text-xs font-bold mb-1">AIS DISABLED</div>
+                                            <div class="text-white font-semibold mb-1">IRAN_TANKER_001</div>
+                                            <div class="text-xs text-slate-400">Tanker</div>
+                                            <div class="text-xs text-orange-400 mt-1">Threat: 60</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="absolute top-4 right-4 bg-slate-800/95 border border-slate-600 rounded-lg p-3 w-48 backdrop-blur-sm">
+                                        <div class="text-red-500 text-xs font-bold mb-2">AIS DISABLED</div>
+                                        <div class="text-white text-sm font-semibold mb-1">IRAN_TANKER_001</div>
+                                        <div class="space-y-1 text-xs">
+                                            <div class="text-slate-400">Type: <span class="text-white">Tanker</span></div>
+                                            <div class="text-slate-400">Flag: <span class="text-white">Iran</span></div>
+                                            <div class="text-slate-400">Threat: <span class="text-orange-400">60</span></div>
+                                            <div class="text-slate-400">Length: <span class="text-white">180m</span></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="absolute top-4 left-4 flex gap-2">
+                                        <div class="bg-slate-800/95 border border-slate-600 rounded px-2 py-1 text-xs text-white backdrop-blur-sm">
+                                            Vessels: 3
+                                        </div>
+                                        <div class="bg-red-900/80 border border-red-500 rounded px-2 py-1 text-xs text-red-300 backdrop-blur-sm">
+                                            2 Dark
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'architecture':
+                    app.innerHTML = `
+                        <div class="flex flex-col h-screen p-16 bg-gradient-to-br from-slate-950 to-slate-900">
+                            <h2 class="text-6xl font-bold text-white mb-4">${slide.title}</h2>
+                            <p class="text-2xl text-cyan-400 mb-12">${slide.subtitle}</p>
+                            <div class="flex-1 flex items-center justify-center">
+                                <div class="grid grid-cols-3 gap-8 max-w-5xl">
+                                    ${slide.components.map((comp, idx) => `
+                                        <div class="relative">
+                                            <div class="bg-slate-800/50 border-2 border-cyan-500/50 rounded-xl p-8 text-center hover:border-cyan-400 transition-all">
+                                                <svg class="w-16 h-16 text-cyan-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                                <p class="text-white font-semibold text-lg">${comp}</p>
+                                            </div>
+                                            ${idx < slide.components.length - 1 && idx % 3 !== 2 ? '<div class="absolute top-1/2 -right-4 w-8 h-0.5 bg-cyan-500/50"></div>' : ''}
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'scoring':
+                    app.innerHTML = `
+                        <div class="flex flex-col h-screen p-16 bg-gradient-to-br from-slate-950 to-slate-900">
+                            <h2 class="text-6xl font-bold text-white mb-12">${slide.title}</h2>
+                            <div class="grid grid-cols-2 gap-12 flex-1">
+                                <div>
+                                    <h3 class="text-2xl font-semibold text-cyan-400 mb-6">Scoring Factors</h3>
+                                    <div class="space-y-4">
+                                        ${slide.factors.map((factor, idx) => `
+                                            <div class="flex items-center gap-4 bg-slate-800/50 p-4 rounded-lg border border-slate-700">
+                                                <div class="w-8 h-8 bg-cyan-500/20 rounded-full flex items-center justify-center flex-shrink-0">
+                                                    <span class="text-cyan-400 font-bold">${idx + 1}</span>
+                                                </div>
+                                                <p class="text-slate-200 text-lg">${factor}</p>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-semibold text-cyan-400 mb-6">Risk Gradient</h3>
+                                    <div class="space-y-6">
+                                        ${slide.gradient.map(level => `
+                                            <div class="bg-${level.color}-950/50 border-2 border-${level.color}-500 rounded-lg p-6">
+                                                <div class="flex justify-between items-center mb-2">
+                                                    <span class="text-2xl font-bold text-${level.color}-400">${level.label}</span>
+                                                    <span class="text-slate-400">${level.range}</span>
+                                                </div>
+                                                <div class="h-3 bg-${level.color}-500 rounded-full"></div>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'trajectories':
+                    app.innerHTML = `
+                        <div class="flex flex-col h-screen p-16 bg-gradient-to-br from-slate-950 to-slate-900">
+                            <h2 class="text-6xl font-bold text-white mb-4">${slide.title}</h2>
+                            <p class="text-2xl text-cyan-400 mb-12">${slide.subtitle}</p>
+                            <div class="grid grid-cols-2 gap-12 flex-1">
+                                <div class="space-y-6">
+                                    ${slide.capabilities.map(cap => `
+                                        <div class="flex items-start gap-4 bg-slate-800/50 p-6 rounded-lg border border-cyan-500/30">
+                                            <svg class="w-6 h-6 text-cyan-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                            <p class="text-slate-200 text-xl leading-relaxed">${cap}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                <div class="bg-slate-800/50 rounded-xl border border-slate-700 p-8 flex items-center justify-center">
+                                    <div class="text-center w-full">
+                                        <div class="w-full h-64 border-2 border-cyan-500/30 rounded-lg mb-4 relative overflow-hidden">
+                                            <svg class="w-full h-full" viewBox="0 0 400 300">
+                                                <path d="M 50 150 Q 150 50, 250 150 T 350 150" stroke="cyan" stroke-width="3" fill="none" opacity="0.6" />
+                                                <circle cx="50" cy="150" r="6" fill="lime" />
+                                                <circle cx="350" cy="150" r="6" fill="red" />
+                                            </svg>
+                                        </div>
+                                        <p class="text-slate-400">24-hour vessel trajectory visualization</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'reports':
+                    app.innerHTML = `
+                        <div class="flex flex-col h-screen p-16 bg-gradient-to-br from-slate-950 to-slate-900">
+                            <h2 class="text-6xl font-bold text-white mb-12">${slide.title}</h2>
+                            <div class="grid grid-cols-2 gap-12 flex-1">
+                                <div class="space-y-6">
+                                    ${slide.features.map(feature => `
+                                        <div class="flex items-start gap-4 bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+                                            <svg class="w-6 h-6 text-cyan-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                            </svg>
+                                            <p class="text-slate-200 text-xl leading-relaxed">${feature}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                <div class="bg-red-950/20 border-2 border-red-500/50 rounded-xl p-8">
+                                    <div class="bg-slate-900 rounded-lg p-6 mb-4">
+                                        <div class="text-red-500 text-sm font-bold mb-4">UNCLASSIFIED // FOR OFFICIAL USE ONLY</div>
+                                        <div class="text-center mb-4">
+                                            <div class="text-4xl font-bold text-cyan-400 mb-2">TIDEMARK</div>
+                                            <div class="text-xl text-white">MARITIME INTELLIGENCE REPORT</div>
+                                        </div>
+                                        <div class="bg-slate-800 rounded p-4 text-sm">
+                                            <div class="text-cyan-400 mb-2">Dark Vessel Identification & Sanctions Enforcement</div>
+                                            <div class="text-slate-400">Persian Gulf / Strait of Hormuz AOR</div>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-2 text-slate-300 text-sm">
+                                        <div>• Generated: Fri, 05 Dec 2025 01:23:11 GMT</div>
+                                        <div>• Dark Vessels (AIS Disabled): 2</div>
+                                        <div>• High-Risk Vessels (Score ≥ 60): 2</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'usecases':
+                    app.innerHTML = `
+                        <div class="flex flex-col h-screen p-16 bg-gradient-to-br from-slate-950 to-slate-900">
+                            <h2 class="text-6xl font-bold text-white mb-12">${slide.title}</h2>
+                            <div class="grid grid-cols-3 gap-8 flex-1">
+                                ${slide.categories.map(cat => `
+                                    <div class="bg-slate-800/50 rounded-xl border border-slate-700 p-8">
+                                        <h3 class="text-3xl font-bold text-cyan-400 mb-6">${cat.name}</h3>
+                                        <ul class="space-y-4">
+                                            ${cat.items.map(item => `
+                                                <li class="flex items-start gap-3">
+                                                    <div class="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
+                                                    <span class="text-slate-200 text-lg">${item}</span>
+                                                </li>
+                                            `).join('')}
+                                        </ul>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'market':
+                    app.innerHTML = `
+                        <div class="flex flex-col h-screen p-16 bg-gradient-to-br from-slate-950 to-slate-900">
+                            <h2 class="text-6xl font-bold text-white mb-12">${slide.title}</h2>
+                            <div class="flex-1 flex flex-col justify-center">
+                                <div class="text-center mb-12">
+                                    <div class="text-8xl font-bold text-cyan-400 mb-4">${slide.total}</div>
+                                    <div class="text-3xl text-slate-400">Total Addressable Market</div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-6 max-w-5xl mx-auto">
+                                    ${slide.markets.map(market => `
+                                        <div class="bg-slate-800/50 rounded-xl border border-slate-700 p-8">
+                                            <div class="text-xl text-slate-400 mb-3">${market.segment}</div>
+                                            <div class="text-5xl font-bold text-white mb-3">${market.size}</div>
+                                            <div class="text-green-400 text-lg">↑ ${market.cagr} CAGR</div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'competitive':
+                    app.innerHTML = `
+                        <div class="flex flex-col h-screen p-16 bg-gradient-to-br from-slate-950 to-slate-900">
+                            <h2 class="text-6xl font-bold text-white mb-12">${slide.title}</h2>
+                            <div class="flex-1 flex flex-col justify-center">
+                                <div class="relative bg-slate-800/30 rounded-xl border border-slate-700 p-8 max-w-4xl mx-auto w-full">
+                                    <div class="absolute left-8 top-1/2 -translate-y-1/2 -rotate-90 text-slate-400 text-sm font-semibold">
+                                        Capability Depth
+                                    </div>
+                                    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-400 text-sm font-semibold">
+                                        Speed to Deploy
+                                    </div>
+                                    <div class="ml-12 mb-12 relative h-96">
+                                        <div class="absolute inset-0 border-l-2 border-b-2 border-slate-600"></div>
+                                        ${slide.competitors.map(comp => `
+                                            <div class="absolute transform -translate-x-1/2 -translate-y-1/2" style="left: ${comp.x}%; bottom: ${comp.y}%;">
+                                                <div class="bg-${comp.color}-500/20 border-2 border-${comp.color}-500 rounded-lg px-4 py-2 whitespace-nowrap">
+                                                    <span class="text-${comp.color}-400 font-semibold">${comp.name}</span>
+                                                </div>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                <div class="text-center mt-8">
+                                    <div class="inline-block bg-cyan-500/20 border border-cyan-400 px-8 py-4 rounded-xl">
+                                        <p class="text-2xl font-semibold text-cyan-400">${slide.positioning}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'business':
+                    app.innerHTML = `
+                        <div class="flex flex-col h-screen p-16 bg-gradient-to-br from-slate-950 to-slate-900">
+                            <h2 class="text-6xl font-bold text-white mb-12">${slide.title}</h2>
+                            <div class="space-y-6 flex-1 flex flex-col justify-center">
+                                ${slide.streams.map(stream => `
+                                    <div class="bg-slate-800/50 rounded-xl border border-slate-700 p-8">
+                                        <div class="grid grid-cols-3 gap-8 items-center">
+                                            <div>
+                                                <div class="text-2xl font-bold text-cyan-400 mb-2">${stream.model}</div>
+                                                <div class="text-sm text-slate-500">${stream.revenue}</div>
+                                            </div>
+                                            <div class="col-span-2">
+                                                <p class="text-slate-200 text-lg">${stream.path}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'traction':
+                    app.innerHTML = `
+                        <div class="flex flex-col h-screen p-16 bg-gradient-to-br from-slate-950 to-slate-900">
+                            <h2 class="text-6xl font-bold text-white mb-4">${slide.title}</h2>
+                            <p class="text-2xl text-cyan-400 mb-12">${slide.subtitle}</p>
+                            <div class="grid grid-cols-2 gap-6 flex-1">
+                                ${slide.built.map(item => `
+                                    <div class="bg-green-950/30 border-2 border-green-500/50 rounded-xl p-6 flex items-center gap-6">
+                                        <svg class="w-12 h-12 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        <div>
+                                            <p class="text-xl text-white font-semibold mb-1">${item}</p>
+                                            <p class="text-green-400 text-sm uppercase tracking-wider">COMPLETE</p>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'roadmap':
+                    app.innerHTML = `
+                        <div class="flex flex-col h-screen p-16 bg-gradient-to-br from-slate-950 to-slate-900">
+                            <h2 class="text-6xl font-bold text-white mb-12">${slide.title}</h2>
+                            <div class="flex-1 flex items-center">
+                                <div class="w-full space-y-6">
+                                    ${slide.phases.map((phase, idx) => `
+                                        <div class="relative">
+                                            <div class="flex items-center gap-6">
+                                                <div class="flex-shrink-0 w-32">
+                                                    <div class="bg-cyan-500/20 border-2 border-cyan-400 rounded-lg px-4 py-2 text-center">
+                                                        <div class="text-cyan-400 font-bold text-lg">${phase.phase}</div>
+                                                        <div class="text-slate-400 text-sm">${phase.timeline}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-1 bg-slate-800/50 rounded-xl border border-slate-700 p-6">
+                                                    <p class="text-white text-xl">${phase.goal}</p>
+                                                </div>
+                                            </div>
+                                            ${idx < slide.phases.length - 1 ? '<div class="absolute left-16 top-full w-0.5 h-6 bg-cyan-500/30"></div>' : ''}
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'funding':
+                    app.innerHTML = `
+                        <div class="flex flex-col h-screen p-16 bg-gradient-to-br from-slate-950 to-slate-900">
+                            <h2 class="text-6xl font-bold text-white mb-12">${slide.title}</h2>
+                            <div class="space-y-8 flex-1 flex flex-col justify-center">
+                                ${slide.phases.map(phase => `
+                                    <div class="bg-slate-800/50 rounded-xl border-2 border-cyan-500/50 p-8">
+                                        <div class="flex items-center justify-between mb-6">
+                                            <h3 class="text-3xl font-bold text-white">${phase.name}</h3>
+                                            <div class="text-4xl font-bold text-cyan-400">${phase.amount}</div>
+                                        </div>
+                                        <div class="grid grid-cols-3 gap-4">
+                                            ${phase.goals.map(goal => `
+                                                <div class="bg-slate-900/50 rounded-lg p-4 border border-slate-700">
+                                                    <p class="text-slate-200">${goal}</p>
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'whynow':
+                    app.innerHTML = `
+                        <div class="flex flex-col h-screen p-16 bg-gradient-to-br from-slate-950 to-slate-900">
+                            <h2 class="text-6xl font-bold text-white mb-12">${slide.title}</h2>
+                            <div class="grid grid-cols-2 gap-8 flex-1">
+                                ${slide.factors.map(factor => `
+                                    <div class="bg-slate-800/50 rounded-xl border border-cyan-500/30 p-8 hover:border-cyan-400 transition-all">
+                                        <svg class="w-16 h-16 text-cyan-400 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        <h3 class="text-2xl font-bold text-white mb-4">${factor.title}</h3>
+                                        <p class="text-slate-300 text-lg leading-relaxed">${factor.desc}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="text-center mt-12">
+                                <div class="inline-block bg-cyan-500/20 border-2 border-cyan-400 px-12 py-6 rounded-xl">
+                                    <p class="text-3xl font-bold text-cyan-400">${slide.tagline}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'team':
+                    app.innerHTML = `
+                        <div class="flex flex-col h-screen p-16 bg-gradient-to-br from-slate-950 to-slate-900">
+                            <h2 class="text-6xl font-bold text-white mb-12">${slide.title}</h2>
+                            <div class="flex-1 flex items-center justify-center">
+                                <div class="max-w-3xl w-full bg-slate-800/50 rounded-2xl border border-slate-700 p-12">
+                                    <div class="text-center mb-8">
+                                        <svg class="w-20 h-20 text-cyan-400 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                                        </svg>
+                                        <h3 class="text-3xl font-bold text-white mb-2">Founder & Technical Lead</h3>
+                                    </div>
+                                    <div class="space-y-4">
+                                        ${slide.strengths.map(strength => `
+                                            <div class="flex items-start gap-4 bg-slate-900/50 p-5 rounded-lg">
+                                                <svg class="w-6 h-6 text-cyan-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                </svg>
+                                                <p class="text-slate-200 text-lg">${strength}</p>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'cta':
+                    app.innerHTML = `
+                        <div class="flex flex-col h-screen p-16 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900">
+                            <h2 class="text-6xl font-bold text-white mb-16">${slide.title}</h2>
+                            <div class="grid grid-cols-2 gap-12 flex-1">
+                                <div class="bg-slate-800/50 rounded-2xl border-2 border-cyan-500/50 p-10">
+                                    <svg class="w-16 h-16 text-cyan-400 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"></path>
+                                    </svg>
+                                    <h3 class="text-3xl font-bold text-white mb-6">${slide.government.title}</h3>
+                                    <p class="text-slate-300 text-xl mb-8 leading-relaxed">${slide.government.message}</p>
+                                    <div class="flex flex-wrap gap-3">
+                                        ${slide.government.orgs.map(org => `
+                                            <div class="bg-cyan-500/20 border border-cyan-400 px-4 py-2 rounded-lg">
+                                                <span class="text-cyan-400 font-semibold">${org}</span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                <div class="bg-slate-800/50 rounded-2xl border-2 border-green-500/50 p-10">
+                                    <svg class="w-16 h-16 text-green-400 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <h3 class="text-3xl font-bold text-white mb-6">${slide.investors.title}</h3>
+                                    <p class="text-slate-300 text-xl mb-8 leading-relaxed">${slide.investors.message}</p>
+                                    <div class="bg-green-950/30 border-2 border-green-500 rounded-xl p-6 text-center">
+                                        <div class="text-5xl font-bold text-green-400">${slide.investors.ask}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                default:
+                    app.innerHTML = `<div class="flex items-center justify-center h-screen text-white">Slide not found</div>`;
+            }
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            renderSlide(slides[currentSlide]);
+            updateNavigation();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            renderSlide(slides[currentSlide]);
+            updateNavigation();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            renderSlide(slides[currentSlide]);
+            updateNavigation();
+        }
+
+        function updateNavigation() {
+            const dots = document.querySelectorAll('.slide-dot');
+            dots.forEach((dot, idx) => {
+                if (idx === currentSlide) {
+                    dot.className = 'slide-dot h-2 w-8 rounded-full transition-all bg-cyan-400';
+                } else {
+                    dot.className = 'slide-dot h-2 w-2 rounded-full transition-all bg-slate-600 hover:bg-slate-500 cursor-pointer';
+                }
+            });
+            document.getElementById('slide-counter').textContent = `Slide ${currentSlide + 1} / ${slides.length}`;
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Initial render
+        renderSlide(slides[0]);
+
+        // Add navigation UI
+        document.body.insertAdjacentHTML('beforeend', `
+            <div class="fixed bottom-8 left-0 right-0 flex items-center justify-center gap-4 px-8 z-50">
+                <button onclick="prevSlide()" class="bg-slate-800/90 hover:bg-slate-700 text-white p-3 rounded-full border border-slate-600 transition-all backdrop-blur-sm">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+                
+                <div class="flex gap-2">
+                    ${slides.map((_, idx) => `
+                        <button onclick="goToSlide(${idx})" class="slide-dot h-2 ${idx === 0 ? 'w-8 bg-cyan-400' : 'w-2 bg-slate-600 hover:bg-slate-500'} rounded-full transition-all"></button>
+                    `).join('')}
+                </div>
+
+                <button onclick="nextSlide()" class="bg-slate-800/90 hover:bg-slate-700 text-white p-3 rounded-full border border-slate-600 transition-all backdrop-blur-sm">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div id="slide-counter" class="fixed top-8 right-8 text-slate-400 text-sm z-50">
+                Slide 1 / ${slides.length}
+            </div>
+
+            <div class="fixed top-8 left-8 z-50">
+                <div class="text-cyan-400 font-bold text-xl">TIDEMARK</div>
+            </div>
+        `);
+    </script>
 </body>
 </html>
